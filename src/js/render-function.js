@@ -1,11 +1,7 @@
-// Описаний у документації
-import SimpleLightbox from "simplelightbox";
-// Додатковий імпорт стилів
-import "simplelightbox/dist/simple-lightbox.min.css";
 import { refs } from "../main";
 
 export function renderItems(users) {
-  const lightbox = new SimpleLightbox('.gallery a');
+  
   const markup = users
     .map((user) => {
       return `<li class="gallery-item">
@@ -26,8 +22,5 @@ export function renderItems(users) {
       </li>`;
     })
     .join("");
-
-  refs.container.insertAdjacentHTML("afterbegin",markup);
-
-  lightbox.refresh(); 
+  refs.container.insertAdjacentHTML("beforeend",markup);
 }
