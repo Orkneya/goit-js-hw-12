@@ -36,8 +36,8 @@ async function onFormSubmit(e){
     return;
   }
     refs.loader.style.display = 'block';
-    page = 1;
     try{
+      page = 1;
       const {hits, totalHits} = await searchImging(inputValue,page);
       totalPage = Math.ceil(totalHits / limit);
       if (hits.length === 0){
@@ -51,8 +51,8 @@ async function onFormSubmit(e){
       renderItems(hits);
       lightbox.refresh(); 
       refs.loader.style.display = 'none';
-      if(totalPage>1) {showButton()};
-
+      if(totalPage>1) 
+        {showButton()};
     }  catch(error){
       showError(error);
     }
