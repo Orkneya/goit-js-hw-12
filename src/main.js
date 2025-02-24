@@ -29,6 +29,7 @@ refs.formSubmit.addEventListener('submit', onFormSubmit);
 refs.btnChange.addEventListener("click", onFofmClick);
 async function onFormSubmit(e){
   e.preventDefault();
+  page = 1;
   inputValue = e.currentTarget.elements.inpImg.value.trim();
   refs.container.innerHTML = '';
   if (!inputValue){
@@ -37,7 +38,6 @@ async function onFormSubmit(e){
   }
     refs.loader.style.display = 'block';
     try{
-      page = 1;
       const {hits, totalHits} = await searchImging(inputValue,page);
       totalPage = Math.ceil(totalHits / limit);
       if (hits.length === 0){
@@ -52,7 +52,10 @@ async function onFormSubmit(e){
       lightbox.refresh(); 
       refs.loader.style.display = 'none';
       if(totalPage>1) 
-        {showButton()};
+        {showButton();
+      }  else {
+        hiddenButton();
+      }
     }  catch(error){
       showError(error);
     }
@@ -99,9 +102,6 @@ function hiddenButton(){
 function scrollPage(){
   const info = refs.container.firstElementChild.getBoundingClientRect();
   const heightImg = info.height;
-  console.log("hello");
-  
-  console.log(567, heightImg);
   scrollBy({
     behavior : 'smooth',
     top : heightImg*2,
